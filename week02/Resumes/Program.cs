@@ -6,7 +6,7 @@ class Program
     {
         Job job1 = new Job();
         job1._company = "Microsoft";
-        job1._jobTitle = "Software Engineer"; 
+        job1._jobTitle = "Software Engineer";
         job1._startYear = 2015;
         job1._endYear = 2018;
 
@@ -18,5 +18,13 @@ class Program
 
         job1.Display();
         job2.Display();
+        
+        Resume resume1 = new Resume();
+        resume1._name = "Ruth Blake";
+
+        resume1._jobs.Add(job1);
+        resume1._jobs.Add(job2);
+
+        resume1.Display();
     }
 }
