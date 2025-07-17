@@ -16,18 +16,34 @@ public class Scripture
         }
     }
 
-    public void HideRandomWords(int numberToHide)
+    public void HideRandomWords(int count)
     {
-        Random random = new Random();
-        int count = 0;
-        while (count < numberToHide)
+        List<int> visibleIndexes = new List<int>();
+
+        for (int i = 0; i < _words.Count; i++)
         {
-            int index = random.Next(_words.Count);
-            if (!_words[index].IsHidden())
+            if (!_words[i].IsHidden())
             {
-                _words[index].Hide();
-                count++;
+                visibleIndexes.Add(i);
             }
+        }
+
+        if (visibleIndexes.Count <= count)
+        {
+            foreach (int i in visibleIndexes)
+            {
+                _words[i].Hide();
+            }
+            return;
+        }
+
+        Random rand = new Random();
+        for (int i = 0; i < count; i++)
+        {
+            int randIndex = rand.Next(visibleIndexes.Count);
+            int wordToHideIndex = visibleIndexes[randIndex];
+            _words[wordToHideIndex].Hide();
+            visibleIndexes.RemoveAt(randIndex);
         }
     }
 
