@@ -1,3 +1,4 @@
+// I added a txt file with some scriptures and changed the Program to pull a random scripture from the file.
 using System;
 using System.Collections.Generic;
 
