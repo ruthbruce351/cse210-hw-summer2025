@@ -8,4 +8,24 @@ public class Customer
         _name = name;
         _address = address;
     }
+
+    public string GetName()
+    {
+        return _name;
+    }
+
+    public Address GetAddress()
+    {
+        return _address;
+    }
+
+    public bool IsUSA()
+    {
+        return _address.IsUSA();
+    }
+
+    public string GetAddressString()
+    {
+        return _address.GetFullAddress();
+    }
 }
