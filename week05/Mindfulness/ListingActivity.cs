@@ -6,31 +6,57 @@ public class ListingActivity : Activity
     public ListingActivity(string activityName, string description, string duration)
         : base(activityName, description, duration)
     {
-        _count = 0;
+        _name = "Listing Activity";
+        _description = "This activity will help you reflect by listing positive things in your life.";
         _prompts = new List<string>
         {
-            "List your favorite things about today.",
-            "List the people you are grateful for.",
-            "List your goals for the week.",
-            "List the things that make you happy.",
-            "List the skills you want to improve."
+            "Who are people that you appreciate?",
+            "What are personal strengths of yours?",
+            "What are you grateful for today?"
         };
+        _count = 0;
     }
 
     public void Run()
     {
+        DisplayStartingMessage();
 
+        string prompt = GetRandomPrompt();
+        Console.WriteLine($"List as many responses as you can to the following prompt:");
+        Console.WriteLine($"--- {prompt} ---");
+        Console.Write("You may begin in: ");
+        ShowCountdown(5);
+        Console.WriteLine();
+
+        List<string> responses = GetListFromUser();
+
+        _count = responses.Count;
+        Console.WriteLine($"\nYou listed {_count} items.");
+
+        DisplayEndingMessage();
     }
 
-    public void GetRandomPrompt()
+    private string GetRandomPrompt()
     {
-        Random random = new Random();
-        int index = random.Next(_prompts.Count);
-        Console.WriteLine($"{_prompts[index]}");
+        Random rand = new Random();
+        return _prompts[rand.Next(_prompts.Count)];
     }
 
-    public List<string> GetListFromUser()
+    private List<string> GetListFromUser()
     {
-       return new List<string>(); 
+        List<string> list = new List<string>();
+        DateTime end = DateTime.Now.AddSeconds(_duration);
+
+        while (DateTime.Now < end)
+        {
+            Console.Write("> ");
+            string input = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(input))
+            {
+                list.Add(input);
+            }
+        }
+
+        return list;
     }
 }

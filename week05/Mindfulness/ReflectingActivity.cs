@@ -3,7 +3,8 @@ public class ReflectingActivity : Activity
     private List<string> _prompts;
 
     private List<string> _questions;
-    public ReflectingActivity()
+    public ReflectingActivity(string activityName, string description, string duration)
+        : base(activityName, description, duration)
     {
         _name = "Reflecting Activity";
         _description = "This activity will help you reflect on times when you have shown strength and resilience.";
