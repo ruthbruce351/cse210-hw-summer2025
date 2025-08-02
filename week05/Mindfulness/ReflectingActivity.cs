@@ -1,42 +1,62 @@
 public class ReflectingActivity : Activity
 {
-    private List<string> _prompts = new List<string>
-    {
-        "What is something you are grateful for?",
-        "What is a challenge you overcame recently?",
-        "What is a goal you want to achieve?",
-        "What is a lesson you learned from a past experience?"
-    };
+    private List<string> _prompts;
 
-    private List<string> _questions = new List<string>
+    private List<string> _questions;
+    public ReflectingActivity()
     {
-        "How did that make you feel?",
-        "What did you learn from that experience?",
-        "How can you apply this lesson in the future?",
-        "What would you do differently next time?"
-    };
-
-    public ReflectingActivity(string activityName, string description, string duration)
-        : base(activityName, description, duration)
-    {
+        _name = "Reflecting Activity";
+        _description = "This activity will help you reflect on times when you have shown strength and resilience.";
+        _prompts = new List<string>
+        {
+            "Think of a time when you overcame a challenge.",
+            "Recall a moment of personal growth.",
+            "Remember a time you helped someone in need."
+        };
+        _questions = new List<string>
+        {
+            "Why was this experience meaningful to you?",
+            "What did you learn about yourself?",
+            "How did you feel at the end of it?",
+            "What strengths did you use?"
+        };
     }
 
     public void Run()
     {
+        DisplayStartingMessage();
+        string prompt = GetRandomPrompt();
+
+        Console.WriteLine("Consider the following prompt:");
+        Console.WriteLine($"--- {prompt} ---");
+        Console.WriteLine("When you have something in mind, press enter to continue.");
+        Console.ReadLine();
+
+        Console.WriteLine("Now ponder each of the following questions:");
+        ShowSpinner(2);
+
+        DateTime end = DateTime.Now.AddSeconds(_duration);
+        while (DateTime.Now < end)
+        {
+            string question = GetRandomQuestion();
+            Console.WriteLine($"> {question}");
+            ShowSpinner(4);
+            Console.WriteLine();
+        }
+
+        DisplayEndingMessage();
     }
 
     public string GetRandomPrompt()
     {
         Random random = new Random();
-        int index = random.Next(_prompts.Count);
-        return _prompts[index];
+        return _prompts[random.Next(_prompts.Count)];
     }
 
     public string GetRandomQuestion()
     {
         Random random = new Random();
-        int index = random.Next(_questions.Count);
-        return _questions[index];
+        return _questions[random.Next(_questions.Count)];
     }
 
     public string DisplayPrompt()
