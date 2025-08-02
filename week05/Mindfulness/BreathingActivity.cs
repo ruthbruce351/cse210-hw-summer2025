@@ -1,11 +1,8 @@
 public class BreathingActivity : Activity
 {
-    public BreathingActivity(string activityName, string description, string duration)
-        : base(activityName, description, duration)
-    {
-        _name = "Breathing Activity";
-        _description = "This activity will help you relax by guiding you through breathing in and out slowly.";
-    }   
+    public BreathingActivity() :
+    base("Breathing Activity", "This activity will help you relax by guiding you through slow breathing.") {}
+ 
 
     public void Run()
     {

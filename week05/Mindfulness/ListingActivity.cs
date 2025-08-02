@@ -3,8 +3,9 @@ public class ListingActivity : Activity
     private int _count;
     private List<string> _prompts;
 
-    public ListingActivity(string activityName, string description, string duration)
-        : base(activityName, description, duration)
+    public ListingActivity()
+        : base("Listing Activity", "This activity will help you reflect by listing positive things in your life.")
+
     {
         _name = "Listing Activity";
         _description = "This activity will help you reflect by listing positive things in your life.";

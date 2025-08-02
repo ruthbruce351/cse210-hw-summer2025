@@ -7,12 +7,13 @@ public class Activity
     protected string _description;
     protected int _duration;
 
-    public Activity(string name, string description, string duration)
+    public Activity(string name, string description)
     {
-        _name = "Mindfulness Activity";
-        _description = "This is ...";
+        _name = name;
+        _description = description;
         _duration = 0;
     }
+
 
     public void DisplayStartingMessage()
     {
