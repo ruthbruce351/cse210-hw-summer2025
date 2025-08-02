@@ -14,11 +14,6 @@ public class Customer
         return _name;
     }
 
-    public Address GetAddress()
-    {
-        return _address;
-    }
-
     public bool IsUSA()
     {
         return _address.IsUSA();
