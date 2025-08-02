@@ -16,6 +16,8 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
+        Console.WriteLine($"Get Ready...");
+        ShowSpinner(2);
         Console.WriteLine($"Welcome to the {_name}!");
         Console.WriteLine($"{_description}");
         Console.WriteLine($"Enter duration in seconds: ");
