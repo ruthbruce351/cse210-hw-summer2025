@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-
 public class ReflectingActivity : Activity
 {
     private List<string> _prompts;
     private List<string> _questions;
+
+    private List<string> _unusedPrompts;
+    private List<string> _unusedQuestions;
+
     private static Random _random = new Random();
 
     public ReflectingActivity()
@@ -25,6 +25,9 @@ public class ReflectingActivity : Activity
             "How did you feel at the end of it?",
             "What strengths did you use?"
         };
+
+        _unusedPrompts = new List<string>(_prompts);
+        _unusedQuestions = new List<string>(_questions);
     }
 
     public void Run()
@@ -61,11 +64,29 @@ public class ReflectingActivity : Activity
 
     private string GetRandomPrompt()
     {
-        return _prompts[_random.Next(_prompts.Count)];
+        if (_unusedPrompts.Count == 0)
+        {
+            _unusedPrompts = new List<string>(_prompts);
+        }
+
+        int index = _random.Next(_unusedPrompts.Count);
+        string prompt = _unusedPrompts[index];
+        _unusedPrompts.RemoveAt(index);
+
+        return prompt;
     }
 
     private string GetRandomQuestion()
     {
-        return _questions[_random.Next(_questions.Count)];
+        if (_unusedQuestions.Count == 0)
+        {
+            _unusedQuestions = new List<string>(_questions);
+        }
+
+        int index = _random.Next(_unusedQuestions.Count);
+        string question = _unusedQuestions[index];
+        _unusedQuestions.RemoveAt(index);
+
+        return question;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-
 public class Activity
 {
     protected string _name;

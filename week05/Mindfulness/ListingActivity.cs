@@ -1,20 +1,24 @@
+using System;
+using System.Collections.Generic;
+
 public class ListingActivity : Activity
 {
     private int _count;
     private List<string> _prompts;
+    private List<string> _unusedPrompts;
+    private static Random _random = new Random();
 
     public ListingActivity()
         : base("Listing Activity", "This activity will help you reflect by listing positive things in your life.")
-
     {
-        _name = "Listing Activity";
-        _description = "This activity will help you reflect by listing positive things in your life.";
         _prompts = new List<string>
         {
             "Who are people that you appreciate?",
             "What are personal strengths of yours?",
             "What are you grateful for today?"
         };
+
+        _unusedPrompts = new List<string>(_prompts);
         _count = 0;
     }
 
@@ -39,8 +43,16 @@ public class ListingActivity : Activity
 
     private string GetRandomPrompt()
     {
-        Random rand = new Random();
-        return _prompts[rand.Next(_prompts.Count)];
+        if (_unusedPrompts.Count == 0)
+        {
+            _unusedPrompts = new List<string>(_prompts);
+        }
+
+        int index = _random.Next(_unusedPrompts.Count);
+        string prompt = _unusedPrompts[index];
+        _unusedPrompts.RemoveAt(index);
+
+        return prompt;
     }
 
     private List<string> GetListFromUser()
