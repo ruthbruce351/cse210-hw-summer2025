@@ -15,8 +15,9 @@ public class Address
 
     public string GetFullAddress()
     {
-        return $"{_street}, {_city}, {_state} {_country}";
+        return $"{_street}\n{_city}, {_state}\n{_country}";
     }
+
 
     public bool IsUSA()
     {

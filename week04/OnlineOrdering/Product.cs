@@ -12,7 +12,6 @@ public class Product
         _price = price;
         _quantity = quantity;
     }
-
     public double GetTotalCost()
     {
         return _price * _quantity;
