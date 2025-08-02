@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public class Order
 {
     private List<Product> _products;
@@ -9,6 +11,11 @@ public class Order
         _products = new List<Product>();
     }
 
+    public void AddProduct(Product product)
+    {
+        _products.Add(product);
+    }
+
     public double GetTotalCost()
     {
         double totalCost = 0;
@@ -17,7 +24,7 @@ public class Order
             totalCost += product.GetTotalCost();
         }
 
-        totalCost += customer.IsUSA() ? 5 : 35;
+        totalCost += _customer.IsUSA() ? 5 : 35;
         return totalCost;
     }
 
@@ -34,8 +41,8 @@ public class Order
     public string GetShippingLabel()
     {
         string label = "Shipping Label:\n";
-        label += customer.GetName() + "\n";
-        label += customer.GetAddressString();
+        label += _customer.GetName() + "\n";
+        label += _customer.GetAddressString();
         return label;
     }
 }
