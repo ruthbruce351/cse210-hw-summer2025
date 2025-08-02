@@ -19,7 +19,7 @@ public class BreathingActivity : Activity
             Console.WriteLine();
 
             Console.Write("Now breathe out... ");
-            ShowCountdown(3);
+            ShowCountdown(6);
             Console.WriteLine("\n");
         }
 
