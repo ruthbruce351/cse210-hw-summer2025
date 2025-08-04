@@ -11,9 +11,4 @@ public class Square : Shape
     {
         return _side * _side;
     }
-
-    public double GetSideLength()
-    {
-        return _side;
-    }
 }

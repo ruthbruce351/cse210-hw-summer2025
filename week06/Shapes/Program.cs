@@ -8,5 +8,9 @@ class Program
         Square square1 = new Square(5, "red");
         Console.WriteLine($"Color of square: {square1.GetColor()}");
         Console.WriteLine($"Area of square: {square1.GetArea()}");
+
+        Circle circle1 = new Circle(3, "blue");
+        Console.WriteLine($"Color of circle: {circle1.GetColor()}");
+        Console.WriteLine($"Area of circle: {circle1.GetArea()}");
     }
 }
