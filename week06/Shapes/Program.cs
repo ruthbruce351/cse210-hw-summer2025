@@ -5,12 +5,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        Square square1 = new Square(5, "red");
-        Console.WriteLine($"Color of square: {square1.GetColor()}");
-        Console.WriteLine($"Area of square: {square1.GetArea()}");
+        List<Shape> shapes = new List<Shape>();
+        shapes.Add(new Circle(5, "Red"));
+        shapes.Add(new Square(4, "Blue"));
+        shapes.Add(new Rectangle(3, 6, "Green"));
 
-        Circle circle1 = new Circle(3, "blue");
-        Console.WriteLine($"Color of circle: {circle1.GetColor()}");
-        Console.WriteLine($"Area of circle: {circle1.GetArea()}");
+        foreach (Shape shape in shapes)
+        {
+            Console.WriteLine($"Color: {shape.GetColor()}, Area: {shape.GetArea()}");
+        }
     }
 }
