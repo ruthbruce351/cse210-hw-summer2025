@@ -12,18 +12,20 @@ public class GoalManager
     public void Start()
     {
         Console.WriteLine("Welcome to the Eternal Quest Goal Manager!");
-        Console.WriteLine("Let's get started!");
     }
 
     public void DisplayPlayerInfo()
     {
+        Console.WriteLine();
         Console.WriteLine($"Current Score: {_score}");
     }
 
     public void ListGoalNames()
     {
+        Console.WriteLine();
         if (_goals.Count == 0)
         {
+
             Console.WriteLine("No goals available.");
             return;
         }
@@ -37,6 +39,7 @@ public class GoalManager
 
     public void ListGoalDetails()
     {
+        Console.WriteLine();
         if (_goals.Count == 0)
         {
             Console.WriteLine("No goals available.");
@@ -52,6 +55,7 @@ public class GoalManager
 
     public void CreateGoal()
     {
+        Console.WriteLine();
         Console.WriteLine("Select Goal Type:");
         Console.WriteLine("1. Simple Goal");
         Console.WriteLine("2. Eternal Goal");
@@ -59,6 +63,7 @@ public class GoalManager
         Console.Write("Enter choice: ");
         int choice = int.Parse(Console.ReadLine());
 
+        Console.WriteLine();
         Console.Write("Enter goal name: ");
         string name = Console.ReadLine();
         Console.Write("Enter goal description: ");
@@ -94,12 +99,14 @@ public class GoalManager
 
     public void RecordEvent()
     {
+        Console.WriteLine();
         if (_goals.Count == 0)
         {
             Console.WriteLine("No goals to record.");
             return;
         }
 
+        Console.WriteLine();
         Console.WriteLine("Which goal did you complete?");
         for (int i = 0; i < _goals.Count; i++)
         {
@@ -124,6 +131,7 @@ public class GoalManager
 
    public void SaveGoals()
     {
+        Console.WriteLine();
         Console.Write("Enter filename to save goals: ");
         string filename = Console.ReadLine();
 
@@ -147,6 +155,7 @@ public class GoalManager
 
     public void LoadGoals()
     {
+        Console.WriteLine();
         Console.Write("Enter filename to load goals: ");
         string filename = Console.ReadLine();
 

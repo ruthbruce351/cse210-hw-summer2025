@@ -1,0 +1,3 @@
+60
+Eternal|Eternal Goal|Eternal Goal Description|10
+Checklist|Checklist Goal|Checklist Goal Description|5|2|50|2

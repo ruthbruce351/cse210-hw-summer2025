@@ -6,10 +6,16 @@ class Program
     {
         GoalManager goalManager = new GoalManager();
         goalManager.Start();
+        Console.WriteLine();
+        Console.WriteLine("Press any key to go to menu...");
+        Console.ReadKey();
 
         bool running = true;
         while (running)
         {
+            Console.Clear();
+            
+            Console.WriteLine();
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
@@ -25,18 +31,33 @@ class Program
             {
                 case "1":
                     goalManager.CreateGoal();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to menu...");
+                    Console.ReadKey();
                     break;
                 case "2":
                     goalManager.ListGoalNames();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to menu...");
+                    Console.ReadKey();
                     break;
                 case "3":
                     goalManager.SaveGoals();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to menu...");
+                    Console.ReadKey();
                     break;
                 case "4":
                     goalManager.LoadGoals();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to menu...");
+                    Console.ReadKey();
                     break;
                 case "5":
                     goalManager.RecordEvent();
+                    Console.WriteLine();
+                    Console.WriteLine("Press any key to return to menu...");
+                    Console.ReadKey();
                     break;
                 case "6":
                     running = false;
