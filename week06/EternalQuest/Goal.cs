@@ -11,19 +11,15 @@ public abstract class Goal
         _points = points;
     }
 
-    public void RecordEvent()
+    public abstract void RecordEvent()
     { }
 
-    public bool IsComplete()
+    public abstract bool IsComplete()
     { }
 
-    public string GetDetailsString()
-    {
-        
-    }
+    public abstract string GetDetailsString()
+    { }
 
-    public string GetStringRepresentation()
-    {
-
-    }
+    public abstract string GetStringRepresentation()
+    { }
 }
