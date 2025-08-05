@@ -12,12 +12,18 @@ public class CheckListGoal : Goal
         _bonus = bonus;
     }
 
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
-        if (_amountCompleted < _target)
+        if (_currentCount < _targetCount)
         {
-            _amountCompleted++;
+            _currentCount++;
+            if (_currentCount == _targetCount)
+            {
+                return _points + _bonusPoints;
+            }
+            return _points;
         }
+        return 0;
     }
 
     public override bool IsComplete()
