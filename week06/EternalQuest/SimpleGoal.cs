@@ -10,7 +10,7 @@ public class SimpleGoal : Goal
 
     public override void RecordEvent()
     {
-        
+        _isComplete = true;
     }
 
     public override bool IsComplete()
@@ -20,11 +20,11 @@ public class SimpleGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"";
+        return $"[{(_isComplete ? "X" : " ")}] {_shortName} ({_description})";
     }
     
     public override string GetDetailsString()
     {
-        return $"";
+        return $"Simple|{_shortName}|{_description}|{_points}|{_isComplete}";
     }
 }
