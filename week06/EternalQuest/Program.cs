@@ -1,3 +1,4 @@
+//Creativity Element: Added a progress bar to the Checklist Goals.
 using System;
 
 class Program
