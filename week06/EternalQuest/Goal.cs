@@ -3,6 +3,7 @@ public abstract class Goal
     protected string _shortName;
     protected string _description;
     protected int _points;
+    protected int _lastEventPoints;
 
     public Goal(string shortName, string description, int points)
     {
@@ -18,4 +19,9 @@ public abstract class Goal
     public abstract string GetDetailsString();
 
     public abstract string GetStringRepresentation();
+
+    public int GetLastEventPoints()
+    {
+        return _lastEventPoints;
+    }
 }

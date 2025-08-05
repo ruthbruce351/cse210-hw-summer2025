@@ -1,0 +1,5 @@
+95
+Simple|Simple Goal|Simple Goal Description|5|True
+Eternal|Eternal Goal|Eternal Goal Description|10
+Checklist|Checklist Goal|Checklist Goal Description|15|2|50|2
+Simple|Simple Goal 2|Simple Goal 2 Description|50|False

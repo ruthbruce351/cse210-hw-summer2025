@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 public class GoalManager
 {
     private List<Goal> _goals;
@@ -85,7 +81,7 @@ public class GoalManager
                 int targetCount = int.Parse(Console.ReadLine());
                 Console.Write("Enter bonus points on completion: ");
                 int bonus = int.Parse(Console.ReadLine());
-                newGoal = new CheckListGoal(name, description, points, targetCount, bonus);
+                newGoal = new CheckListGoal(name, description, points, targetCount, bonus, amountCompleted: 0);
                 break;
             default:
                 Console.WriteLine("Invalid choice.");
@@ -107,7 +103,7 @@ public class GoalManager
         Console.WriteLine("Which goal did you complete?");
         for (int i = 0; i < _goals.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {_goals[i].GetDetailString()}");
+            Console.WriteLine($"{i + 1}. {_goals[i].GetDetailsString()}");
         }
 
         Console.Write("Enter goal number: ");
@@ -119,61 +115,93 @@ public class GoalManager
             return;
         }
 
-        int earnedPoints = _goals[index].RecordEvent();
+        _goals[index].RecordEvent();
+        int earnedPoints = _goals[index].GetLastEventPoints();
+
         _score += earnedPoints;
         Console.WriteLine($"You earned {earnedPoints} points! Total Score: {_score}");
     }
 
-    public void SaveGoals(string filename)
+   public void SaveGoals()
     {
-        using (StreamWriter writer = new StreamWriter(filename))
+        Console.Write("Enter filename to save goals: ");
+        string filename = Console.ReadLine();
+
+        try
         {
-            writer.WriteLine(_score);
-            foreach (var goal in _goals)
+            using (StreamWriter writer = new StreamWriter(filename))
             {
-                writer.WriteLine(goal.ToFileString());
+                writer.WriteLine(_score);
+                foreach (var goal in _goals)
+                {
+                    writer.WriteLine(goal.GetStringRepresentation());
+                }
             }
+            Console.WriteLine($"Goals saved successfully to '{filename}'!");
         }
-        Console.WriteLine("Goals saved successfully!");
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving goals: {ex.Message}");
+        }
     }
 
-    public void LoadGoals(string filename)
+    public void LoadGoals()
     {
+        Console.Write("Enter filename to load goals: ");
+        string filename = Console.ReadLine();
+
         if (!File.Exists(filename))
         {
             Console.WriteLine("File not found.");
             return;
         }
 
-        string[] lines = File.ReadAllLines(filename);
-        _score = int.Parse(lines[0]);
-        _goals.Clear();
-
-        for (int i = 1; i < lines.Length; i++)
+        try
         {
-            string[] parts = lines[i].Split('|');
-            string type = parts[0];
+            string[] lines = File.ReadAllLines(filename);
+            _score = int.Parse(lines[0]);
+            _goals.Clear();
 
-            switch (type)
+            for (int i = 1; i < lines.Length; i++)
             {
-                case "Simple":
-                    _goals.Add(new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4])));
-                    break;
-                case "Eternal":
-                    _goals.Add(new EternalGoal(parts[1], parts[2], int.Parse(parts[3])));
-                    break;
-                case "Checklist":
-                    _goals.Add(new ChecklistGoal(
-                        parts[1], parts[2], int.Parse(parts[3]),
-                        int.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6])
-                    ));
-                    break;
-                default:
-                    Console.WriteLine($"Unknown goal type: {type}");
-                    break;
-            }
-        }
+                string[] parts = lines[i].Split('|');
+                string type = parts[0];
 
-        Console.WriteLine("Goals loaded successfully!");
+                switch (type)
+                {
+                    case "Simple":
+                        // Expected format: Simple|Name|Description|Points|IsComplete
+                        _goals.Add(new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]), bool.Parse(parts[4])));
+                        break;
+
+                    case "Eternal":
+                        // Expected format: Eternal|Name|Description|Points
+                        _goals.Add(new EternalGoal(parts[1], parts[2], int.Parse(parts[3])));
+                        break;
+
+                    case "Checklist":
+                        // Expected format: Checklist|Name|Description|Points|Target|Bonus|AmountCompleted
+                        _goals.Add(new CheckListGoal(
+                            parts[1],
+                            parts[2],
+                            int.Parse(parts[3]),
+                            int.Parse(parts[4]),
+                            int.Parse(parts[5]),
+                            int.Parse(parts[6])
+                        ));
+                        break;
+
+                    default:
+                        Console.WriteLine($"Unknown goal type: {type}");
+                        break;
+                }
+            }
+
+            Console.WriteLine($"Goals loaded successfully from '{filename}'!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading goals: {ex.Message}");
+        }
     }
 }

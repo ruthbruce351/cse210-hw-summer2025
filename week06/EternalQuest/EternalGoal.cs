@@ -5,7 +5,9 @@ public class EternalGoal : Goal
     { }
 
     public override void RecordEvent()
-    { }
+    {
+        _lastEventPoints = _points;
+    }
 
     public override bool IsComplete()
     {
