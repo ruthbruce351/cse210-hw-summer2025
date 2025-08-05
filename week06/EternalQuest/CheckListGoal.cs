@@ -37,12 +37,24 @@ public class CheckListGoal : Goal
 
     public override string GetDetailsString()
     {
-        return $"[{(IsComplete() ? "X" : " ")}] {_shortName} ({_description}) -- Completed {_amountCompleted}/{_target}";
+        return $"[{(IsComplete() ? "X" : " ")}] {_shortName} ({_description}) -- Completed {GetProgressBar()}";
     }
 
     public override string GetStringRepresentation()
     {
         return $"Checklist|{_shortName}|{_description}|{_points}|{_target}|{_bonus}|{_amountCompleted}";
     }
+
+    private string GetProgressBar(int barLength = 10)
+{
+    double progress = (double)_amountCompleted / _target;
+    int filledLength = (int)(barLength * progress);
+    int emptyLength = barLength - filledLength;
+
+    string filled = new string('#', filledLength);
+    string empty = new string('-', emptyLength);
+
+    return $"[{filled}{empty}] {_amountCompleted}/{_target}";
+}
 
 }
