@@ -35,7 +35,7 @@ public class GoalManager
         Console.WriteLine("Available Goals:");
         foreach (var goal in _goals)
         {
-            Console.WriteLine(goal.GetName());
+            Console.WriteLine(goal.GetDetailsString());
         }
     }
 
@@ -50,7 +50,7 @@ public class GoalManager
         Console.WriteLine("Goal Details:");
         for (int i = 0; i < _goals.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {_goals[i].GetStatus()}");
+            Console.WriteLine($"{i + 1}. {_goals[i].GetDetailsString()}");
         }
     }
 
@@ -85,7 +85,7 @@ public class GoalManager
                 int targetCount = int.Parse(Console.ReadLine());
                 Console.Write("Enter bonus points on completion: ");
                 int bonus = int.Parse(Console.ReadLine());
-                newGoal = new ChecklistGoal(name, description, points, targetCount, bonus);
+                newGoal = new CheckListGoal(name, description, points, targetCount, bonus);
                 break;
             default:
                 Console.WriteLine("Invalid choice.");
@@ -107,7 +107,7 @@ public class GoalManager
         Console.WriteLine("Which goal did you complete?");
         for (int i = 0; i < _goals.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {_goals[i].GetName()}");
+            Console.WriteLine($"{i + 1}. {_goals[i].GetDetailString()}");
         }
 
         Console.Write("Enter goal number: ");
